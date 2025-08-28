@@ -1,0 +1,144 @@
+------------
+-- @IntellJ
+--  IDEA
+------------
+Shift+Enter/新起下一行
+Ctrl+Enter/新起上一行
+Ctrl+//行注释
+Ctrl+Shift+//块注释
+Ctrl+鼠标/进入类定义
+Shift+滚轮/窗口左右移动
+Tab/选择行缩进
+Shift+Tab/反向缩进
+Ctrl+O/方法重写
+Ctrl+I/实现接口方法
+Alt+Enter/上下文操作
+补全://首字母大写技巧
+Alt+4/运行
+Alt+7/类结构
+Ctrl++/打开选中文件夹的所有子文件夹
+Ctrl+Shift++/展开当前项目的所有文件夹
+Ctrl+Shift+Backspace/跳转到上一次编辑位置
+Shift+Shift/全局查找
+Ctrl+N/查找类
+Ctrl+Shift+N/查找文件
+Ctrl+Shift+Alt+N/查找变量符号
+----
+catelina run/当前窗口启动 tomcat
+------------
+-- @NORMAL
+------------
+h,j,k,l（移动）	w，b（间隔单词移动）
+gg（文件开头）	G（文件结尾）
+{（前一段落）	}（下一段落）
+0（跳到行首） 	$（跳到行末）
+H（屏幕顶部）	M（屏幕中间）
+L（屏幕底部）	Ctrl+b/f/u/d（上下滚动一页或半页）
+%（跳转对应括号）	Ctrl+w+=（所有窗格一样大）
+Ctrl+o（光标位置后退）
+Ctrl+i（光标位置前进）
+Ctrl+]（跳转至文档关键字）
+Ctrl+T（返回）
+-----
+i（光标前）  	I（行首）
+a（光标后）	A（行尾）
+o（行下） 	O（行上）
+V（VisualLine）	Ctrl+v（VisualBlock）
+x（删光标所指） 	X（删除光标前）
+dd（删当前行）	D（删光标到行尾）
+y（复制）		yy（赋值行）
+p（粘贴到光标后）	P（粘贴到光标前）
++p（系统剪贴板）	数字+.（重复操作）
+u（撤销）		Ctrl+r（恢复）
+-----
+yaw（复制单词及空格）	yiw（复制单词）
+diw（删除单词）		ciw（删除单词并进入插入模式）
+cw（删除光标后到单词结束）	cc（修改整行）
+ci"（修改双引号内容）	ci(（修改()内容）
+"ayy（a~z，剪切至寄存器）	"ap（粘贴至光标处）
+Ctrl+Y（鼠标上滚）
+Ctrl+E（鼠标下滚）
+zh（鼠标左滚）
+zl（鼠标右滚）
+-----
+/（查找）		？（反向查找）
+n（下一个匹配结果）N（上一个匹配结果）
+Ctrl+w+h/l/j/k（切换窗口）
+Ctrl+w+w（下一个窗口）
+Ctrl+w+q（关闭当前窗口）
+q:（打开命令历史页面）
+a（tree新建文件）
+d（tree删除文件）
+r（tree重命名文件）
+x（tree移动文件）
+c（tree复制文件，文件夹打开前按p进行粘贴）
+f（tree过滤器）
+g?（tree mappings）
+K（lsp显示关键字信息）
+LspStop（lsp关闭）
+gd（光标下单词高亮，并跳转至该单词第一次出现的位置 ）
+[d/]d（上一个/下一个诊断信息）
+------------
+-- @INSERT
+------------
+ESC/Ctrl+c（返回普通模式）
+Ctrl+u（撤销上一次操作/删除光标前内容）
+Ctrl+o（临时进入普通模式）
+------------
+-- @VISUAL
+------------
+y（复制选中）	d（删除选中）
+c（更改选中）	x（剪切选中）
+~（切换选中大小写）
+>（缩进选中）	>（反向缩进）
+p（粘贴到选中）	P（粘贴到选中前区域）
+zf（折叠代码）	zo/a（打开代码）
+[{（跳转至左花括号）
+]}（跳转至右花括号）
+Ctrl-c（返回普通模式）
+Ctrl-G（Select）
+------------
+-- @COMMAND
+------------
+:w（保存）	:q/qa（退出当前/全部窗口）
+:wq（保持并退出）	:q！（不保存退出）
+:bd（删除缓冲区）	:tabclose（关闭当前标签页）
+:10（跳转到指定行）:10j（向下移动10行）
+:e <filename>（打开文件）
+:set（查看或设置）
+:buffers/ls（列出所有缓冲区）
+:sp（水平分割窗口）	:vsp（垂直分割窗口）
+:e $MYVIMRC（打开配置文件）
+:tabnew/tabnext/tabprev（新建/切换标签页）
+:nohl（取消高亮）
+:s/old/new（替换当前行第一个匹配项）
+:%s/old/new/g(lobal)（替换全局匹配项）
+:%s/old/new/gc（替换全局匹配项，每次询问是否替换）
+:%s/\<old\>/new/g（替换全局单词，注意反斜线）
+:retab（Tab转换为空格）
+:retab！（空格转换为Tab）
+:!del filename（删除文件）
+:saveas filename（另存为）
+:Ex（打开文件管理Netrw）
+:colorscheme oxocarbon（更改主题）
+:set background=light（更改背景）
+:set fileencoding=utf-8/cp936/euc-cn/latin1（设置文件编码）
+:set scrollbind（横屏联动滚动）
+:setfiletype html（更改文件类型）
+:help <command>（帮助）
+:message（查看消息）
+:!cmd /c（CMD命令）
+:!powershell -command（PS命令）
+:term main.exe（终端新窗口）
+:Tab和方向键同样适用
+:file name（重命名buffer）
+:pwd（打印当前绝对路径）
+Ctrl+c（强制终止程序）
+:qj （recording@ j，宏录制）
+------------
+-- @SPECIAL
+------------
+插入模式下 Ctrl+v 输入Unicode码（uff0c，u3302，uff08，uff09输入特殊字符）
+插入模式下 Ctrl+k 然后敲两个字符（合成特殊字符）
+------------
+-- END
