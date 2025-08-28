@@ -1,0 +1,8 @@
+${AnsiColor.RED}   _____${AnsiColor.GREEN}            _${AnsiColor.GREEN}                ${AnsiColor.CYAN}____${AnsiColor.BLUE}              ${AnsiColor.MAGENTA}__
+${AnsiColor.RED}  / ___/${AnsiColor.YELLOW}____  _____${AnsiColor.GREEN}(_)___  ____ ${AnsiColor.CYAN}_   / __ )${AnsiColor.BLUE}____  ____${AnsiColor.MAGENTA}  / /_
+${AnsiColor.RED}  \__ \${AnsiColor.YELLOW}/ __ \/ ___${AnsiColor.GREEN}/ / __ \/ __ ${AnsiColor.CYAN}`/  / __  ${AnsiColor.BLUE}/ __ \/ __ ${AnsiColor.MAGENTA}\/ __/
+${AnsiColor.RED} ___/ /${AnsiColor.YELLOW} /_/ / /  ${AnsiColor.GREEN}/ / / / / /_${AnsiColor.CYAN}/ /  / /_/ ${AnsiColor.BLUE}/ /_/ / /_${AnsiColor.MAGENTA}/ / /_
+${AnsiColor.RED}/____/${AnsiColor.YELLOW} .___/_/  ${AnsiColor.GREEN}/_/_/ /_/\__${AnsiColor.CYAN}, /  /_____${AnsiColor.BLUE}/\____/\___${AnsiColor.MAGENTA}_/\__/
+${AnsiColor.RED}    /${AnsiColor.YELLOW}_/        ${AnsiColor.GREEN}         ${AnsiColor.CYAN}/____/     ${AnsiColor.BLUE}           ${AnsiColor.MAGENTA}
+
+${AnsiColor.BRIGHT_CYAN}:: 🌈Spring Boot :: ${AnsiColor.DEFAULT}${spring-boot.formatted-version}
