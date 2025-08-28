@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开始</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://img.icons8.com/stickers/100/paper-plane.png" type="image/x-icon" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Comic Neue', 'Microsoft YaHei', sans-serif;
+      user-select: none;
+      background: linear-gradient(120deg, #6DC7C8 0%, #8EC5FC 50%, #E0C3FC 100%);
+      background-size: 300% 300%;
+      animation: gradientAnimation 20s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transform: translateY(-10%);
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 5rem;
+      color: #ffffff;
+      font-family: 'Comic Neue', cursive;
+      margin: 0 0 2rem;
+      transition: transform 0.2s ease;
+    }
+
+    h1:hover {
+      animation: shake 0.5s ease;
+    }
+
+    @keyframes shake {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      25%  { transform: translate(2px, -2px) rotate(-1deg); }
+      50%  { transform: translate(-2px, 2px) rotate(1deg); }
+      75%  { transform: translate(2px, 2px) rotate(0deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 550px;
+      margin-bottom: 2rem;
+    }
+
+    .search-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 1rem 3.5rem 1rem 1.5rem;
+      border-radius: 2rem;
+      border: none;
+      outline: none;
+      font-size: 1.3rem;
+      font-family: 'Comic Neue', cursive;
+      color: #808080;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .search-input:hover {
+      transform: scale(1.05);
+    }
+
+    .search-input:focus {
+      transform: none;
+    }
+
+    .search-button {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+      outline: none;
+    }
+
+    .search-button:hover {
+      transform: scale(1.2);
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0) translateX(0); opacity: 1; }
+      50%  { transform: translateY(-20px) translateX(10px); opacity: 0.7; }
+      100% { transform: translateY(0) translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome Minami</h1>
+    <form class="search-wrapper" action="https://www.google.com/search" method="GET">
+      <input class="search-input" type="text" name="q" placeholder="Start Anyway..." autocomplete="off" />
+      <button class="search-button" type="submit">🚀</button>
+    </form>
+  </div>
+
+  <script>
+    const numParticles = 20;
+    for (let i = 0; i < numParticles; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 8 + 4;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.top = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 6 + 's';
+      p.style.animationDuration = Math.random() * 4 + 4 + 's';
+      document.body.appendChild(p);
+    }
+  </script>
+</body>
+</html>
