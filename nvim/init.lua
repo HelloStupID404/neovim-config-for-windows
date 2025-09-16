@@ -84,7 +84,7 @@ keymap.set('n', '<leader>cp', ':<C-r>+')  -- 粘贴至命令行
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")  -- 整行移动
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 keymap.set('t', 'fj', '<C-\\><C-n>')  -- exit<CR>
-keymap.set('i', '<C-BS>', '<ESC>diwa')  -- 模拟Ctrl+BackSpace
+keymap.set('i', '<C-BS>', '<C-w')  -- Ctrl+BackSpace
 -- 新增窗口
 keymap.set("n", "<leader>sv", "<C-w>v")
 keymap.set("n", "<leader>sh", "<C-w>s")
