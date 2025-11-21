@@ -11,14 +11,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.api.nvim_create_autocmd("FileType", {  -- 根据文件类型自定义缩进
-  pattern = { "html", "css", "json", "xml",
-    "javascript", "typescript", "markdown", "lua" },
-  callback = function()
-    vim.bo.shiftwidth = 2
-    vim.bo.tabstop = 2
-  end,
-})
 -- 文本显示
 vim.opt.wrap = true
 vim.opt.linebreak = true
@@ -113,10 +105,10 @@ keymap.set("n", "<leader>ja", ":terminal echo ----------------------&echo Welcom
 -- python
 keymap.set("n", "<leader>py", ":terminal echo ------------------------&echo Welcome To Python Space!&echo ------------------------& python %<CR>", { noremap = true, silent = true })
 -- 主题切换
-local themes = { "dawnfox", "PaperColor", "duskfox", "tokyonight-moon" }
+local themes = { "dawnfox", "duskfox", "tokyonight-moon" }
 local index = 1
 local function toggle_theme()
-  index = index % 4 + 1
+  index = index % 3 + 1
   vim.cmd.colorscheme(themes[index])
 end
 vim.keymap.set("n", "<leader>th", toggle_theme, { noremap = true, silent = true })
@@ -126,7 +118,7 @@ vim.keymap.set("n", "<leader>th", toggle_theme, { noremap = true, silent = true 
 -- 关闭窗口
 keymap.set("n", "<C-q>", ":q!<CR>")  -- 按键重叠会延迟
 -- 字体
-vim.o.guifont = "JetBrainsMono Nerd Font,Microsoft YaHei:h16"
+vim.o.guifont = "JetBrainsMono Nerd Font,Microsoft YaHei:h16"  -- "Maple Mono NF CN:style=Regular:h16"
 -- 标题
 vim.o.title = true
 vim.o.titlestring = "%F"  -- 文件绝对路径
@@ -161,12 +153,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {  -- 自动切换
       vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
   end
 })
--- 性能模式
-vim.g.neovide_refresh_rate = 60
--- vim.g.neovide_cursor_animation_length = 0
--- vim.g.neovide_cursor_trail_length = 0
--- vim.g.neovide_cursor_antialiasing = false  -- 关闭抗锯齿
--- vim.g.neovide_scroll_animation_length = 0
 ------------
 -- plugins
 ------------
@@ -205,11 +191,11 @@ require('lualine').setup{
 ----------------
 -- tree-sitter
 require('nvim-treesitter.configs').setup{
-  -- ensure_installed = { "c", "cpp", "java", "python", "c_sharp",
-  --   "typescript", "javascript", "html", "css", "json", "xml",
-  --   "go", "rust", "markdown", "lua", "vim",
-  --   "ruby", "bash", "haskell", "sql"
-  -- },
+  ensure_installed = { "c", "cpp", "java", "python", "c_sharp",
+    "typescript", "javascript", "html", "css", "json", "xml",
+    "go", "rust", "markdown", "lua", "vim",
+    "ruby", "bash", "sql"
+  },
   highlight = {
     enable = true,  -- 启用语法高亮
     additional_vim_regex_highlighting = false,  -- 禁用内建高亮
@@ -321,39 +307,37 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(  -- 说明文档
 local function current_dir(fname)  -- 根目录函数
   return vim.fn.fnamemodify(fname, ":p:h")
 end
--- require('lspconfig').clangd.setup{ root_dir = current_dir }  -- 环境变量、工具链
--- require('lspconfig').pylsp.setup{ root_dir = current_dir }
--- require('lspconfig').html.setup{ root_dir = current_dir }
--- require('lspconfig').cssls.setup{ root_dir = current_dir }
--- require('lspconfig').ts_ls.setup{ root_dir = current_dir }
--- require('lspconfig').jsonls.setup{ root_dir = current_dir }
+require('mason').setup()
+vim.lsp.enable("jdtls")
+vim.lsp.enable("clangd")
+vim.lsp.enable("pylsp")
 --------------
 -- nvim-cmp
 local kind_icons = {
-  Text = "󰉿",
-  Method = "󰆧",
-  Function = "󰊕",
-  Constructor = "",
-  Field = "󰜢",
-  Variable = "󰀫",
-  Class = "󰠱",
-  Interface = "",
-  Module = "",
-  Property = "󰜢",
-  Unit = "󰑭",
-  Value = "󰎠",
-  Enum = "",
-  Keyword = "󰌋",
-  Snippet = "",
-  Color = "󰏘",
-  File = "󰈙",
-  Reference = "󰈇",
-  Folder = "󰉋",
-  EnumMember = "",
-  Constant = "󰏿",
-  Struct = "󰙅",
-  Event = "",
-  Operator = "󰆕",
+  Text = "󰉿 ",
+  Method = "󰆧 ",
+  Function = "󰊕 ",
+  Constructor = " ",
+  Field = "󰜢 ",
+  Variable = "󰀫 ",
+  Class = "󰠱 ",
+  Interface = " ",
+  Module = " ",
+  Property = "󰜢 ",
+  Unit = "󰑭 ",
+  Value = "󰎠 ",
+  Enum = " ",
+  Keyword = "󰌋 ",
+  Snippet = " ",
+  Color = "󰏘 ",
+  File = "󰈙 ",
+  Reference = "󰈇 ",
+  Folder = "󰉋 ",
+  EnumMember = " ",
+  Constant = "󰏿 ",
+  Struct = "󰙅 ",
+  Event = " ",
+  Operator = "󰆕 ",
   TypeParameter = "",
 }
 local function cmp_format(entry, vim_item)
@@ -398,84 +382,12 @@ require("cmp").setup({
   }),
 })
 -------------
+-- colorizer
+require('colorizer').setup()
+-------------
 -- gitsigns
 -- require('gitsigns').setup()
---------------
--- colorizer
--- require'colorizer'.setup()
--------------
--- nvim-dap
--- local dap = require("dap")
--- dap.defaults.fallback.external_terminal = {  -- 外部终端
---   command = 'cmd.exe',
---   args = {'/c', 'start'},
--- }
--- dap.adapters.codelldb = {
---   type = 'server',
---   port = "${port}",
---   executable = {
---     command = "D:\\LANG\\codelldb\\extension\\adapter\\codelldb.exe",
---     args = {"--port", "${port}"},
---   },
--- }
--- dap.configurations.c = {  -- 具体文件类型配置
---   {
---     name = 'Launch with CodeLLDB',
---     type = 'codelldb',
---     request = 'launch',
---     program = function()
---       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '\\', 'file')
---     end,
---     cwd = current_dir,
---     stopOnEntry = false,
---     runInTerminal = true,
---     args = {},
---     console = "integratedTerminal",
---   }
--- }
--- dap.configurations.cpp = dap.configurations.c
--- local dapui = require("dapui")  -- 可视化窗口
--- dapui.setup({
---   icons = { expanded = "▾", collapsed = "▸", current_frame = "➤" },
---   layouts = {
---     {
---       elements = {
---         { id = "scopes", size = 0.6 },
---         { id = "breakpoints", size = 0.2 },
---         { id = "stacks", size = 0.1 },
---         { id = "watches", size = 0.1 },
---       },
---       size = 35,
---       position = "left",
---     },
---     {
---       elements = {
---         { id = "repl", size = 0.6 },
---         { id = "console", size = 0.4 },
---       },
---       size = 12,
---       position = "bottom",
---     },
---   },
--- })
--- dap.listeners.after.event_initialized["dapui_config"] = function()
---   dapui.open()
--- end
--- dap.listeners.before.disconnect["dapui_config"] = function()
---   dapui.close()
--- end
--- vim.keymap.set('n', '<Leader>du', function() dapui.toggle() end)
--- vim.keymap.set("n", "<F5>", dap.continue, { desc = "DAP: Continue" })
--- vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP: Step Over" })
--- vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP: Step Into" })
--- vim.keymap.set("n", "<F12>", dap.step_out, { desc = "DAP: Step Out" })
--- vim.keymap.set("n", "<Leader>dq", dap.terminate, { desc = "DAP: Terminate" })
--- vim.keymap.set("n", "<Leader>bp", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
--- vim.keymap.set("n", "<Leader>B", function()
---   dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
--- end, { desc = "DAP: Conditional Breakpoint" })
--- vim.keymap.set("n", "<Leader>bc", dap.clear_breakpoints, { desc = "DAP: Clear Breakpoints" })
 ------------------
--- 0.10.4 neovim
--- 0.14.0 neovide
+-- neovim 0.11.5
+-- neovide 0.14.0
 -- END
