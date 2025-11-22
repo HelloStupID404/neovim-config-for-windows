@@ -300,17 +300,10 @@ vim.diagnostic.config({  -- 诊断样式
   underline = true,  -- 启用下划线
   update_in_insert = true,
 })
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(  -- 说明文档
-  vim.lsp.handlers.hover, {
-    border = "single",  -- single, double, rounded, solid, shadow
-})
-local function current_dir(fname)  -- 根目录函数
-  return vim.fn.fnamemodify(fname, ":p:h")
-end
-require('mason').setup()
-vim.lsp.enable("jdtls")
-vim.lsp.enable("clangd")
-vim.lsp.enable("pylsp")
+-- require('mason').setup()
+-- vim.lsp.enable("jdtls")
+-- vim.lsp.enable("clangd")
+-- vim.lsp.enable("pylsp")
 --------------
 -- nvim-cmp
 local kind_icons = {
