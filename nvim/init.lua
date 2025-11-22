@@ -53,7 +53,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { link = "Normal" })
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { link = "Normal" })
     vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })  -- 浮窗背景
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
   end,
 })
 vim.cmd('colorscheme dawnfox')
@@ -66,7 +65,6 @@ vim.g.mapleader = " "
 -- 配置
 keymap.set("n", "<leader>in", ":e $MYVIMRC<CR>", { noremap = true, silent = true })
 keymap.set("n", "<leader>rs", ":source $MYVIMRC<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>pl", ":NvimTreeOpen C:/Users/26254/AppData/Local/nvim-data/site/pack/myplugins/start<CR>", { noremap = true, silent = true })
 -- 模式
 keymap.set({"n", "i", "v", "s", "x", "o", "c"}, "fj", "<ESC>")
 keymap.set({'n', 'i', 'v'}, '<C-;>', '<End>')  -- 光标移动至行尾
@@ -90,15 +88,8 @@ keymap.set("n", "<leader>b;", ":bufdo bd<CR>")  -- 清空缓冲条
 keymap.set("n", "<leader>nt", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 keymap.set("n", "<leader>cd", ":NvimTreeOpen %:p:h<CR>", { noremap = true, silent = true })  -- 刷新当前目录
 keymap.set("n", "<leader>af", ":NvimTreeOpen D:/A8File/AUTO<CR>", { noremap = true, silent = true })
--- lspconfig
-keymap.set("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>gr", ":lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fm", ":lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })  -- 格式化
-keymap.set("n", "<leader>do", ":lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
--- clang
-keymap.set("n", "<leader>cl", ":!cmd /k clang -g -O0 -o %<.exe %<CR>")  -- 编译前需先关闭程序
+-- tcc
+keymap.set("n", "<leader>cl", ":!cmd /k tcc -o %<.exe %<CR>")  -- 编译前需先关闭程序
 keymap.set("n", "<leader>ex", ":terminal chcp 65001 & cls & echo -------------------& echo Welcome To C Space!&echo -------------------& %<.exe<CR>", { noremap = true, silent = true })
 -- java
 keymap.set("n", "<leader>ja", ":terminal echo ----------------------&echo Welcome To Java Space!&echo ----------------------& java %<CR>", { noremap = true, silent = true })
@@ -285,101 +276,8 @@ vim.g.rainbow_delimiters = { highlight = highlight }
 require("ibl").setup{ scope = { highlight = highlight } }
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 --------------
--- lspconfig
-vim.lsp.set_log_level("off")  -- 禁用日志
-vim.diagnostic.config({  -- 诊断样式
-  virtual_text = {
-    prefix = '🫤',
-    spacing = 4,
-  },
-  float = {
-    border = "rounded",
-    header = "",  -- 不显示头部信息
-  },
-  signs = true,
-  underline = true,  -- 启用下划线
-  update_in_insert = true,
-})
--- require('mason').setup()
--- vim.lsp.enable("jdtls")
--- vim.lsp.enable("clangd")
--- vim.lsp.enable("pylsp")
---------------
--- nvim-cmp
-local kind_icons = {
-  Text = "󰉿 ",
-  Method = "󰆧 ",
-  Function = "󰊕 ",
-  Constructor = " ",
-  Field = "󰜢 ",
-  Variable = "󰀫 ",
-  Class = "󰠱 ",
-  Interface = " ",
-  Module = " ",
-  Property = "󰜢 ",
-  Unit = "󰑭 ",
-  Value = "󰎠 ",
-  Enum = " ",
-  Keyword = "󰌋 ",
-  Snippet = " ",
-  Color = "󰏘 ",
-  File = "󰈙 ",
-  Reference = "󰈇 ",
-  Folder = "󰉋 ",
-  EnumMember = " ",
-  Constant = "󰏿 ",
-  Struct = "󰙅 ",
-  Event = " ",
-  Operator = "󰆕 ",
-  TypeParameter = "",
-}
-local function cmp_format(entry, vim_item)
-  local kind = vim_item.kind  -- 图标显示
-  if kind_icons[kind] then
-    vim_item.kind = string.format("%s", kind_icons[kind])
-  end
-  local max_width = 50  -- 窗口宽度
-  local label = vim_item.abbr
-  if #label > max_width then
-    vim_item.abbr = string.sub(label, 1, max_width - 3) .."..."
-  end
-  return vim_item
-end
-local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()  -- 加载片段格式
-require("cmp").setup({
-  snippet = {  -- 片段补全引擎
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  sources = {
-    { name = 'buffer' },
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-  window = {
-    completion = {
-      border = "rounded",
-      winhighlight = "Normal:CmpPmenu,FloatBorder:CmpMenuBorder",
-      scrollbar = false,
-      -- winblend = 20,  -- 浮窗透明度
-    },
-    documentation = require('cmp').config.window.bordered(),
-  },
-  formatting = {
-    format = cmp_format,
-  },
-  mapping = require('cmp').mapping.preset.insert({
-    ['<Tab>'] = require('cmp').mapping.confirm({ select = true }),  -- 选中补全项
-  }),
-})
--------------
 -- colorizer
 require('colorizer').setup()
--------------
--- gitsigns
--- require('gitsigns').setup()
 ------------------
 -- neovim 0.11.5
 -- neovide 0.14.0
