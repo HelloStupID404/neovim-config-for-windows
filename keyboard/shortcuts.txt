@@ -162,21 +162,23 @@ set HTTP_PROXY=http://127.0.0.1:7890
 set HTTPS_PROXY=http://127.0.0.1:7890
 netstat -ano | findstr :8080
 ping www.google.com
-C:\Users\xxx\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1/powershell配置文件
------
-@VisualStudio
-Ctrl+Shift+A/创建源文件
------
-@PowerToy
-Alt+Space/打开搜索
-Ctrl+Q/文件速览（文件管理器）
-Win+Ctrl+T/始终置顶
-Win+Shitf+C/取色器
-Ctrl+Ctrl/鼠标指示
 -----
 @QQ
 Ctrl+Alt+Q/显示或隐藏主面板
 Ctrl+`/截图（C取色/Ctrl+S另存为）
 （注意快捷键冲突）
+-----
+@PowerShell
+C:\Users\xxx\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1/powershell配置文件
+takeown /f "C:\Program Files\WindowsApps" /r /d y（更改文件权限）
+"C:\Program Files\WindowsApps" /grant 26254:F /t（权限转移至用户）
+powercfg -h off（关闭睡眠）
+wmic pagefile list /format:list（查看分页文件信息）
+vssadmin list shadowstorage（查看系统还原点信息）
+vssadmin delete shadows /for=C: /all（删除所有还原点）
+vssadmin resize shadowstorage /for=C: /on=C: /maxsize=3GB（手动设置卷影副本大小）
+powershell.exe Checkpoint-Computer -Description "手动保留还原点"
+Dism.exe /Online /Cleanup-Image /StartComponentCleanup
+irm steam-run.com|iex
 -----
 END
