@@ -1,4 +1,7 @@
 -> 安装并开启acpi_call模块 (禁用secure boot)
+sudo apt install acpi-call-dkms
+sudo modprobe acpi_call
+echo "acpi_call" | sudo tee /etc/modules-load.d/acpi_call.conf
 
 -> /etc/systemd/system/charge_limit.service
 [Unit]
